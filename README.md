@@ -68,6 +68,10 @@ LICENSEファイルに記載．
 
 ## Credits
 
+### AviUtl2_ColorLUT_K_Plugin
+
+https://github.com/korarei/AviUtl2_ColorLUT_K_Plugin
+
 ### AviUtl ExEdit2 Plugin SDK
 
 https://spring-fragrance.mints.ne.jp/aviutl/
