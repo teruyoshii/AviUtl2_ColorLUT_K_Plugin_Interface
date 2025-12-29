@@ -1,13 +1,8 @@
-# ColorLUT_K
+# ColorLUT_K改
 
-![GitHub License](https://img.shields.io/github/license/korarei/AviUtl2_ColorLUT_K_Plugin)
-![GitHub Last commit](https://img.shields.io/github/last-commit/korarei/AviUtl2_ColorLUT_K_Plugin)
-![GitHub Downloads](https://img.shields.io/github/downloads/korarei/AviUtl2_ColorLUT_K_Plugin/total)
-![GitHub Release](https://img.shields.io/github/v/release/korarei/AviUtl2_ColorLUT_K_Plugin)
+AviUtl2にLUTファイルを扱えるようにする ColorLUT_Kへのインターフェーススクリプト
 
-AviUtl2にLUTファイルを扱えるようにするプラグイン
-
-[ダウンロードはこちらから](https://github.com/korarei/AviUtl2_ColorLUT_K_Plugin/releases)
+[ColorLUT_Kのダウンロードはこちらから](https://github.com/korarei/AviUtl2_ColorLUT_K_Plugin/releases)
 
 ## 動作確認
 
@@ -24,13 +19,10 @@ AviUtl2にLUTファイルを扱えるようにするプラグイン
 
 ### 導入
 
-下記のいずれかの方法で導入可能．
-
-- 同梱の`*.aux2`をAviUtl2にD&D．
-
-- 同梱の`*.aux2`を`%ProgramData%`内の`aviutl2\Plugin`フォルダに入れる．
-
-- 同梱の`*.aux2`を`aviutl2.exe`と同じ階層内の`data\Plugin`フォルダに入れる．
+1. [ColorLUT_K](https://github.com/korarei/AviUtl2_ColorLUT_K_Plugin)を本体のページのreadmeに従って導入する.
+2. ColorLUT_K改.anm2とColorLUT_cubeList.txtとLUT(フォルダー)を`アプリケーションフォルダ > Script`に直置きする.
+   (Scriptの中の子フォルダに配置すると正しく動作しないので注意)
+3. 使いたいLUTファイル(.cube)を全て`アプリケーションフォルダ > Script > LUT`に入れる
 
 ### 削除
 
@@ -42,29 +34,27 @@ AviUtl2にLUTファイルを扱えるようにするプラグイン
 
 ## 使い方
 
-Cube LUT Specification Version 1.0に準拠したLUTファイル (.cube) を読み込み，画像の色を変える．
+フォーク元のColorLUT_Kと同様に, 
+Cube LUT Specification Version 1.0に準拠したLUTファイル (.cube) を読み込み，画像の色を変える.
 
-読み込んだLUTはファイルパスをキーとしてキャッシュを取るので，LUTに変更があった場合は`Reload LUT`または本体の`キャッシュを破棄`をクリックして再読み込みを行うこと．
+「基準LUTファイル」で指定したLUTファイルと同じ階層にあるLUTファイルのうち, 辞書順で「ﾌｧｲﾙ選択」トラックバーの数値分だけ進んだところにあるLUTファイルを適用する.
 
-本体の`キャッシュを破棄`を行った場合，すべてのLUTファイルに対してキャッシュ破棄を行う．
+LUTファイルを更新した場合は, 基準LUTファイルを再度適当な.cubeファイルに変更することでリストを再生成できる.
 
 ### パラメータ
 
-#### LUT File
+#### 基準LUTファイル
 
 LUTファイルを指定する．
 
-#### Reload LUT
+#### ﾌｧｲﾙ選択
 
-`LUT File`で指定したLUTを再読み込みする．
+「基準LUTファイル」で指定したLUTファイルと同じ階層にあるLUTファイルのうち, 辞書順で「ﾌｧｲﾙ選択」トラックバーの数値分だけ進んだところにあるLUTファイルを適用する.
+LUTフォルダの個数よりも多い場合はループする.
 
 #### Opacity
 
 適用度合．
-
-##  ビルド方法
-
-`.github/workflows`内の`releaser.yml`に記載．
 
 ## License
 LICENSEファイルに記載．
