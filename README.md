@@ -1,6 +1,7 @@
 # ColorLUT_K改
 
-AviUtl2にLUTファイルを扱えるようにする ColorLUT_Kへのインターフェーススクリプト
+AviUtl2でLUTファイルを扱えるようにする ColorLUT_Kへのインターフェーススクリプト
+LUTの切り替えをトラックバーから行えるようになります
 
 [ColorLUT_Kのダウンロードはこちらから](https://github.com/korarei/AviUtl2_ColorLUT_K_Plugin/releases)
 
@@ -20,7 +21,7 @@ AviUtl2にLUTファイルを扱えるようにする ColorLUT_Kへのインタ�
 ### 導入
 
 1. [ColorLUT_K](https://github.com/korarei/AviUtl2_ColorLUT_K_Plugin)を本体のページのreadmeに従って導入する.
-2. ColorLUT_K改.anm2とColorLUT_cubeList.txtとLUT(フォルダー)を`アプリケーションフォルダ > Script`に直置きする.
+2. ColorLUT_K改.anm2とLUT(フォルダー)を`アプリケーションフォルダ > Script`に直置きする.
    (Scriptの中の子フォルダに配置すると正しく動作しないので注意)
 3. 使いたいLUTファイル(.cube)を全て`アプリケーションフォルダ > Script > LUT`に入れる
 
@@ -50,7 +51,7 @@ LUTファイルを指定する．
 #### ﾌｧｲﾙ選択
 
 「基準LUTファイル」で指定したLUTファイルと同じ階層にあるLUTファイルのうち, 辞書順で「ﾌｧｲﾙ選択」トラックバーの数値分だけ進んだところにあるLUTファイルを適用する.
-LUTフォルダの個数よりも多い場合はループする.
+トラックバーの数値がLUTフォルダの個数よりも多い場合は剰余をとってループする.
 
 #### Opacity
 
