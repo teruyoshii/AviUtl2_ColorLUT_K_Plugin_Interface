@@ -1,0 +1,65 @@
+--Korareiさん作成のColorLUT_Kへのインターフェーススクリプトです
+--このスクリプトと、ColorLUT_cubeList.txtをアプリケーションデータフォルダのScript内に配置してください。
+--また、使いたい.cubeファイルはData/Script/LUTフォルダに配置してください。
+--information:ColorLUT_K改
+--label:色調整
+--file@name:基準LUTファイル,""
+--track@num:ﾌｧｲﾙ選択,0,200,0,1
+--track@opacity:Opacity,0,100,100,0.01
+if name == nil then 
+  debug_print("LUT file name is not set.")
+  return
+end
+if prev_name ~= name then
+  local lut_path = ".\\Data\\Script\\LUT\\"
+  local lut_file = io.popen('dir "' .. lut_path .. '*.cube" /b')
+  local file, msg = io.open(".\\Data\\Script\\LUT\\_ColorLUT_cubeList.txt", "w+")
+  if file then
+    for filename in lut_file:lines() do
+      file:write('"' .. filename .. '"\n')
+    end
+    file:close()
+    debug_print("LUT list regenerated.")
+  else
+    debug_print("Failed to open LUT list file for writing: " .. msg)
+  end
+  lut_file:close()
+  LUTFiles = nil -- Force reload of LUT files
+  prev_name = name
+end
+if LUTFiles == nil then
+  local file, msg = io.open(".\\Data\\Script\\LUT\\_ColorLUT_cubeList.txt", "r")
+  if file then
+    -- debug_print("LUT list file opened successfully.")
+    LUTFiles = {}
+    for line in file:lines() do
+      local filename = line:match('"(.-)"')
+      if filename then
+        table.insert(LUTFiles, filename)
+      end
+    end
+    file:close()
+  else
+    debug_print("Failed to open LUT list file: " .. msg)
+    LUTFiles = {}
+  end
+end
+
+local pathToLUTs = name:gsub("[^\\/]+$", "")
+local selectedLUTName = name:match("([^\\/]+)$")
+local selectedLUTIndex = 0
+if selectedLUTName then
+  for i, filename in ipairs(LUTFiles) do
+    if filename == selectedLUTName then
+      selectedLUTIndex = i
+      break
+    end
+  end
+end
+
+local target = pathToLUTs .. LUTFiles[(selectedLUTIndex + num - 1) % #LUTFiles + 1]
+if prev_target ~= target then
+  debug_print("Using LUT: " .. LUTFiles[(selectedLUTIndex + num - 1) % #LUTFiles + 1])
+  prev_target = target
+end
+obj.effect("ColorLUT_K", "LUT File", target, "Opacity", opacity)
